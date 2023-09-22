@@ -1,4 +1,6 @@
-function findMinWindow(source, target) {
+//https://leetcode.com/problems/minimum-window-substring/
+
+function findMinWindowSubstring(source, target) {
     const MAX_LENGTH = Number.POSITIVE_INFINITY;
 
     let windowChars = new Map();
@@ -43,17 +45,17 @@ function findMinWindow(source, target) {
 
 describe("76. Minimum Window Substring", () => {
     test("should output BANC from ADOBECODEBANC, ABC", () => {
-        const result = findMinWindow("ADOBECODEBANC", "ABC");
+        const result = findMinWindowSubstring("ADOBECODEBANC", "ABC");
         expect(result).toBe("BANC");
     });
 
     test("should output a from a, a", () => {
-        const result = findMinWindow("a", "a");
+        const result = findMinWindowSubstring("a", "a");
         expect(result).toBe("a");
     });
 
     test("should output empty strong from a, aa", () => {
-        const result = findMinWindow("a", "aa");
+        const result = findMinWindowSubstring("a", "aa");
         expect(result).toBe("");
     });
 });
