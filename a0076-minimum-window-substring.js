@@ -46,4 +46,14 @@ describe("76. Minimum Window Substring", () => {
         const result = findMinWindow("ADOBECODEBANC", "ABC");
         expect(result).toBe("BANC");
     });
+
+    test("should output a from a, a", () => {
+        const result = findMinWindow("a", "a");
+        expect(result).toBe("a");
+    });
+
+    test("should output empty strong from a, aa", () => {
+        const result = findMinWindow("a", "aa");
+        expect(result).toBe("");
+    });
 });
