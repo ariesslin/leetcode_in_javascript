@@ -1,7 +1,10 @@
 //https://leetcode.com/problems/minimum-window-substring/
 
 function findMinWindowSubstring(source, target) {
-    if (!target || !source || target.length > source.length) return "";
+    const defaultReturn = "";
+
+    if (!target || !source || target.length > source.length)
+        return defaultReturn;
 
     const MAX_LENGTH = Number.POSITIVE_INFINITY;
 
@@ -46,7 +49,7 @@ function findMinWindowSubstring(source, target) {
     }
 
     return minLength === MAX_LENGTH
-        ? ""
+        ? defaultReturn
         : source.substring(startIndex, startIndex + minLength + 1);
 }
 

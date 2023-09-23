@@ -1,7 +1,10 @@
 //https://leetcode.com/problems/permutation-in-string/description/
 
 function findPermutationInString(target, source) {
-    if (!target || !source || target.length > source.length) return false;
+    const defaultReturn = false;
+
+    if (!target || !source || target.length > source.length)
+        return defaultReturn;
 
     let windowChars = new Map();
     let requiredChars = new Map();
@@ -40,7 +43,7 @@ function findPermutationInString(target, source) {
         }
     }
 
-    return false;
+    return defaultReturn;
 }
 
 describe("567. Permutation in String", () => {
