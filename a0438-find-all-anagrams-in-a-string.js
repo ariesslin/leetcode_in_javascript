@@ -1,10 +1,9 @@
 //https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
 function findAnagrams(source, target) {
-    const defaultReturn = [];
+    let collection = [];
 
-    if (!target || !source || target.length > source.length)
-        return defaultReturn;
+    if (!target || !source || target.length > source.length) return collection;
 
     let windowChars = new Map();
     let requiredChars = new Map();
@@ -13,7 +12,6 @@ function findAnagrams(source, target) {
     }
 
     let validCharCount = 0;
-    let collection = [];
 
     let left = 0,
         right = 0;
@@ -44,7 +42,7 @@ function findAnagrams(source, target) {
         }
     }
 
-    return collection.length === 0 ? defaultReturn : collection;
+    return collection;
 }
 
 describe("438. Find All Anagrams in a String", () => {
