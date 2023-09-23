@@ -1,6 +1,8 @@
 //https://leetcode.com/problems/minimum-window-substring/
 
 function findMinWindowSubstring(source, target) {
+    if (!target || !source || target.length > source.length) return "";
+
     const MAX_LENGTH = Number.POSITIVE_INFINITY;
 
     let windowChars = new Map();
@@ -18,9 +20,11 @@ function findMinWindowSubstring(source, target) {
 
     for (; right < source.length; right++) {
         let rightChar = source[right];
-        windowChars.set(rightChar, (windowChars.get(rightChar) || 0) + 1);
-        if (windowChars.get(rightChar) === requiredChars.get(rightChar)) {
-            validCharCount++;
+        if (requiredChars.has(rightChar)) {
+            windowChars.set(rightChar, (windowChars.get(rightChar) || 0) + 1);
+            if (windowChars.get(rightChar) === requiredChars.get(rightChar)) {
+                validCharCount++;
+            }
         }
 
         while (validCharCount === requiredChars.size) {
@@ -31,10 +35,13 @@ function findMinWindowSubstring(source, target) {
 
             let leftChar = source[left];
             left++;
-            if (windowChars.get(leftChar) === requiredChars.get(leftChar)) {
-                validCharCount--;
+
+            if (requiredChars.has(leftChar)) {
+                if (windowChars.get(leftChar) === requiredChars.get(leftChar)) {
+                    validCharCount--;
+                }
+                windowChars.set(leftChar, windowChars.get(leftChar) - 1);
             }
-            windowChars.set(leftChar, windowChars.get(leftChar) - 1);
         }
     }
 
