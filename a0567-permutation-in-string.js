@@ -1,6 +1,8 @@
 //https://leetcode.com/problems/permutation-in-string/description/
 
 function findPermutationInString(target, source) {
+    if (!target || !source || target.length > source.length) return false;
+
     let windowChars = new Map();
     let requiredChars = new Map();
     for (let char of target) {
@@ -14,23 +16,27 @@ function findPermutationInString(target, source) {
 
     for (; right < source.length; right++) {
         let rightChar = source[right];
-        windowChars.set(rightChar, (windowChars.get(rightChar) || 0) + 1);
-        if (windowChars.get(rightChar) === requiredChars.get(rightChar)) {
-            validCharCount++;
+        if (requiredChars.has(rightChar)) {
+            windowChars.set(rightChar, (windowChars.get(rightChar) || 0) + 1);
+            if (windowChars.get(rightChar) === requiredChars.get(rightChar)) {
+                validCharCount++;
+            }
         }
 
         while (validCharCount === requiredChars.size) {
-            console.log(left, right);
             if (right - left + 1 === target.length) {
                 return true;
             }
 
             let leftChar = source[left];
             left++;
-            if (windowChars.get(leftChar) === requiredChars.get(leftChar)) {
-                validCharCount--;
+
+            if (requiredChars.has(leftChar)) {
+                if (windowChars.get(leftChar) === requiredChars.get(leftChar)) {
+                    validCharCount--;
+                }
+                windowChars.set(leftChar, windowChars.get(leftChar) - 1);
             }
-            windowChars.set(leftChar, windowChars.get(leftChar) - 1);
         }
     }
 
